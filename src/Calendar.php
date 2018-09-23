@@ -7,18 +7,25 @@
  */
 namespace Qtvhao\CalendarSchedule;
 
-use Carbon\Carbon;
-
 class Calendar {
 
 	public static function regular() {
 		$calendar = new Calendar();
-		/** @var Carbon $mondayOfMonth */
-		$mondayOfMonth = Carbon::now();
+		/** @var DateTime $mondayOfMonth */
+		$mondayOfMonth = DateTime::now();
 		$calendar->setStart($mondayOfMonth);
+
+		/** @var DateTime $sundayOfMonthEnd */
+		$sundayOfMonthEnd = DateTime::now();
+		$calendar->setEnd($sundayOfMonthEnd);
+
 	}
 
-	private function setStart( Carbon$mondayOfMonth ) {
+	private function setStart( DateTime$mondayOfMonth ) {
 		$this->start_at = $mondayOfMonth;
+	}
+
+	private function setEnd(DateTime $sundayOfMonthEnd ) {
+		$this->end_at = $sundayOfMonthEnd;
 	}
 }
