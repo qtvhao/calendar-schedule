@@ -15,8 +15,10 @@ class DateTime extends Carbon{
 	/**
 	 * @return DateTime
 	 */
-	public static function getMondayStartOfMonth() {
-		$mondayStartOfMonth = DateTime::now();
+	public static function getMondayStartOfMonth(DateTime$date_time = null) {
+		if (is_null( $date_time)) {
+			$mondayStartOfMonth = DateTime::now();
+		}
 		$mondayStartOfMonth->startOfMonth();
 		$mondayStartOfMonth->startOfWeek();
 
@@ -26,8 +28,10 @@ class DateTime extends Carbon{
 	/**
 	 * @return DateTime
 	 */
-	public static function getSundayEndOfMonth() {
-		$sundayEndOfMonth = DateTime::now();
+	public static function getSundayEndOfMonth(DateTime$date_time = null) {
+		if (is_null( $date_time)) {
+			$sundayEndOfMonth = DateTime::now();
+		}
 		$sundayEndOfMonth->endOfMonth();
 		$sundayEndOfMonth->endOfWeek();
 
