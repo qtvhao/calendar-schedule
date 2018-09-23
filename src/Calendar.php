@@ -17,6 +17,8 @@ class Calendar {
 		$calendar = new Calendar();
 		$calendar->setStart(DateTime::getMondayStartOfMonth());
 		$calendar->setEnd(DateTime::getSundayEndOfMonth());
+
+		return $calendar;
 	}
 
 	private function setStart( DateTime$mondayOfMonth ) {
@@ -25,5 +27,9 @@ class Calendar {
 
 	private function setEnd(DateTime $sundayOfMonthEnd ) {
 		$this->end_at = $sundayOfMonthEnd;
+	}
+
+	public function render( $view = 'default' ) {
+		echo "";
 	}
 }
