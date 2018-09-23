@@ -30,8 +30,40 @@ class Calendar {
 	}
 
 	public function render( $view = 'default' ) {
-
-		echo "";
+		$dates = $this->getDates();
+		echo "<div id='date-cells'>";
+		for($i = 0; $i<7;$i++) {
+			$D = $this->start_at->copy()->addDay($i)->format( 'D');
+			echo "<div class='date-cell date-heading'><span class='date-heading-text'>$D</span></div>";
+		}
+		foreach($dates as $date) {
+			echo "<div class='date-cell'></div>";
+		}
+		echo "</div>";
+		?>
+		<style>
+			.date-cell {
+				background: #fff;
+				outline:1px solid #e2e2e2;
+				height: 120px;
+				width: 14%;
+				display: inline-block;
+			}
+			div#date-cells {
+				width: 920px;
+			}
+			.date-heading .date-heading-text{
+				padding: 4px 13px;
+				display: inline-block;
+				text-transform: uppercase;
+			}
+			.date-heading{
+				outline:0;
+				text-align: right;
+				height: unset;
+			}
+		</style>
+		<?php
 	}
 
 	/**
