@@ -8,5 +8,13 @@
       "name": "Hao Nghiem",
       "email": "qtvhao@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "illuminate/support": "^5.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Qtvhao\\CalendarSchedule\\": "src"
+    }
+  }
 }
