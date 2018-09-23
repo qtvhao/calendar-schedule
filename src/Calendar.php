@@ -30,6 +30,22 @@ class Calendar {
 	}
 
 	public function render( $view = 'default' ) {
+
 		echo "";
+	}
+
+	/**
+	 * @return \Illuminate\Support\Collection|DateTime[]
+	 */
+	private function getDates() {
+		$dates = collect();
+		$i = 0;
+		do{
+			$date = $this->start_at->copy()->addDay($i);
+			$dates->push($date);
+			$i++;
+		}while($date->copy()->addDay(1)->lessThanOrEqualTo( $this->end_at));
+
+		return $dates;
 	}
 }
