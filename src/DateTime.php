@@ -12,5 +12,25 @@ namespace Qtvhao\CalendarSchedule;
 use Carbon\Carbon;
 
 class DateTime extends Carbon{
+	/**
+	 * @return DateTime
+	 */
+	public static function getMondayStartOfMonth() {
+		$mondayStartOfMonth = DateTime::now();
+		$mondayStartOfMonth->startOfMonth();
+		$mondayStartOfMonth->startOfWeek();
 
+		return $mondayStartOfMonth;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public static function getSundayEndOfMonth() {
+		$sundayEndOfMonth = DateTime::now();
+		$sundayEndOfMonth->endOfMonth();
+		$sundayEndOfMonth->endOfWeek();
+
+		return $sundayEndOfMonth;
+	}
 }

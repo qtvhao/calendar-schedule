@@ -7,18 +7,16 @@
  */
 namespace Qtvhao\CalendarSchedule;
 
+/**
+ * @property DateTime start_at
+ * @property DateTime end_at
+ */
 class Calendar {
 
 	public static function regular() {
 		$calendar = new Calendar();
-		/** @var DateTime $mondayOfMonth */
-		$mondayOfMonth = DateTime::now();
-		$calendar->setStart($mondayOfMonth);
-
-		/** @var DateTime $sundayOfMonthEnd */
-		$sundayOfMonthEnd = DateTime::now();
-		$calendar->setEnd($sundayOfMonthEnd);
-
+		$calendar->setStart(DateTime::getMondayStartOfMonth());
+		$calendar->setEnd(DateTime::getSundayEndOfMonth());
 	}
 
 	private function setStart( DateTime$mondayOfMonth ) {
