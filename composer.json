@@ -1,0 +1,12 @@
+{
+  "name": "qtvhao/calendar-schedule",
+  "description": "",
+  "minimum-stability": "stable",
+  "license": "none",
+  "authors": [
+    {
+      "name": "Hao Nghiem",
+      "email": "qtvhao@gmail.com"
+    }
+  ]
+}
