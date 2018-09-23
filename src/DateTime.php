@@ -12,6 +12,8 @@ namespace Qtvhao\CalendarSchedule;
 use Carbon\Carbon;
 
 class DateTime extends Carbon{
+	protected static $weekStartsAt = self::SUNDAY;
+	protected static $weekEndsAt = self::SATURDAY;
 	/**
 	 * @return DateTime
 	 */
