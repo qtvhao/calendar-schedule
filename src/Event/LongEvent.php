@@ -9,6 +9,20 @@
 namespace Qtvhao\CalendarSchedule\Event;
 
 
-class LongEvent extends Event {
+use Carbon\Carbon;
 
+class LongEvent extends Event {
+	/**
+	 * @var Carbon
+	 */
+	public $start;
+	/**
+	 * @var Carbon
+	 */
+	public $end;
+
+	public function __construct(Carbon$start, Carbon$end) {
+		$this->start = $start;
+		$this->end = $end;
+	}
 }

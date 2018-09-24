@@ -7,4 +7,12 @@
  */
 namespace Qtvhao\CalendarSchedule\Event;
 
+use Carbon\Carbon;
+
+/**
+ * Class Event
+ * @package Qtvhao\CalendarSchedule\Event
+ * @property Carbon start
+ * @property Carbon end
+ */
 abstract class Event {}
