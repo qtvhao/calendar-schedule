@@ -34,30 +34,64 @@ class Calendar {
 		echo "<div id='date-cells'>";
 		for($i = 0; $i<7;$i++) {
 			$D = $this->start_at->copy()->addDay($i)->format( 'D');
-			echo "<div class='date-cell date-heading'><span class='date-heading-text'>$D</span></div>";
+			echo "<div class='date-cell-wrapper date-cell-heading-wrapper'>
+    <div class='date-cell date-cell-heading'>
+        <div class='date-cell-container'>
+            <div class='date-cell-heading-container'>
+            <span class='date-cell-heading-text'>
+                $D
+            </span>
+            </div>
+        </div>
+    </div>
+</div>";
 		}
 		foreach($dates as $date) {
-			echo "<div class='date-cell'></div>";
+			echo "<div class='date-cell-wrapper'>
+    <div class='date-cell'>
+        <div class='date-cell-container'>
+            <div class='date-cell-text'>
+                {$date->day}
+            </div>
+        </div>
+    </div>
+</div>";
 		}
 		echo "</div>";
 		?>
 		<style>
-			.date-cell {
+            #date-cells{
+                /*font-size:0;*/
+                margin:1em;
+            }
+            /*.date-cell{*/
+                /*font-size:1em;*/
+            /*}*/
+            .date-cell-text{
+                position: absolute;
+                right: 9px;
+                top: 8px;
+            }
+			.date-cell-wrapper {
+                position:relative;
 				background: #fff;
 				outline:1px solid #e2e2e2;
-				height: 120px;
+				height: 100px;
 				width: 14%;
 				display: inline-block;
 			}
 			div#date-cells {
 				width: 920px;
 			}
-			.date-heading .date-heading-text{
+			.date-cell-heading-wrapper .date-cell-heading-container{
+                padding: 3px 4px;
+            }
+			.date-cell-heading-wrapper .date-heading-text{
 				padding: 4px 13px;
 				display: inline-block;
 				text-transform: uppercase;
 			}
-			.date-heading{
+			.date-cell-heading-wrapper{
 				outline:0;
 				text-align: right;
 				height: unset;
