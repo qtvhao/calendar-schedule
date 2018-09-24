@@ -21,7 +21,8 @@ class LongEvent extends Event {
 	 */
 	public $end;
 
-	public function __construct(Carbon$start, Carbon$end) {
+	public function __construct($id, Carbon$start, Carbon$end) {
+		$this->setId( $id);
 		$this->start = $start;
 		$this->end = $end;
 	}

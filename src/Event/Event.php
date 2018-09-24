@@ -15,4 +15,20 @@ use Carbon\Carbon;
  * @property Carbon start
  * @property Carbon end
  */
-abstract class Event {}
+abstract class Event {
+	private $id;
+
+	/**
+	 * @return mixed
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @param mixed $id
+	 */
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+}
