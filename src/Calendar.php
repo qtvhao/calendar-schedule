@@ -58,46 +58,6 @@ class Calendar {
 </div>";
 		}
 		echo "</div>";
-		?>
-		<style>
-            #date-cells{
-                /*font-size:0;*/
-                margin:1em;
-            }
-            /*.date-cell{*/
-                /*font-size:1em;*/
-            /*}*/
-            .date-cell-text{
-                position: absolute;
-                right: 9px;
-                top: 8px;
-            }
-			.date-cell-wrapper {
-                position:relative;
-				background: #fff;
-				outline:1px solid #e2e2e2;
-				height: 100px;
-				width: 14%;
-				display: inline-block;
-			}
-			div#date-cells {
-				width: 920px;
-			}
-			.date-cell-heading-wrapper .date-cell-heading-container{
-                padding: 3px 4px;
-            }
-			.date-cell-heading-wrapper .date-heading-text{
-				padding: 4px 13px;
-				display: inline-block;
-				text-transform: uppercase;
-			}
-			.date-cell-heading-wrapper{
-				outline:0;
-				text-align: right;
-				height: unset;
-			}
-		</style>
-		<?php
 	}
 
 	/**
