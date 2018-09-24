@@ -7,6 +7,8 @@
  */
 namespace Qtvhao\CalendarSchedule;
 
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Qtvhao\CalendarSchedule\Event\Event;
 
 /**
@@ -14,6 +16,14 @@ use Qtvhao\CalendarSchedule\Event\Event;
  * @property DateTime end_at
  */
 class Calendar {
+	/**
+	 * @var Collection
+	 */
+	private $events;
+
+	public function __construct() {
+		$this->events = Collection::make();
+	}
 
 	public static function regular() {
 		$calendar = new Calendar();
@@ -32,8 +42,10 @@ class Calendar {
 	}
 
 	public function render( $view = 'default' ) {
+		echo "<div class='date-cells-wrapper'>";
 		$dates = $this->getDates();
-		echo "<div id='date-cells'>";
+		echo "<div class='date-cells'>";
+		echo "<div class='date-cells-container'>";
 		for($i = 0; $i<7;$i++) {
 			$D = $this->start_at->copy()->addDay($i)->format( 'D');
 			echo "<div class='date-cell-wrapper date-cell-heading-wrapper'>
@@ -49,6 +61,7 @@ class Calendar {
 </div>";
 		}
 		foreach($dates as $date) {
+			$dateEvents = $this->buildEventElementsOfDate($date);
 			echo "<div class='date-cell-wrapper'>
     <div class='date-cell'>
         <div class='date-cell-container'>
@@ -56,9 +69,14 @@ class Calendar {
                 {$date->day}
             </div>
         </div>
+        <div class='date-cell-events-wrapper'>
+			$dateEvents
+        </div>
     </div>
 </div>";
 		}
+		echo "</div>";
+		echo "</div>";
 		echo "</div>";
 	}
 
@@ -78,5 +96,31 @@ class Calendar {
 	}
 
 	public function addEvent( Event$event ) {
+		$this->events->push($event);
+	}
+
+	private function getEventsOfDate( Carbon $date ) {
+		return $this->events->filter( function ( Event $event ) use ( $date ) {
+			return
+				( $event->end->timestamp > $date->timestamp ) and
+				( $event->start->timestamp < $date->timestamp );
+		} );
+	}
+
+	private function buildEventElementsOfDate(Carbon $date ) {
+		$eventsOfDate = $this->getEventsOfDate( $date );
+		$eventsOfDate = $eventsOfDate->map(function(Event$event) use ( $date ) {
+			$width = (($event->end->diffInDays($date) + 1) * 100) . '%';
+
+			return <<<HTML
+<div class='date-cell-events' style="width:$width;padding: 5px;">
+    <div class='date-cell-events-container' style="background:#CFFCC1;padding: 0px 9px;">
+        {$event->getId()}
+    </div>
+</div>
+HTML;
+		})->implode( '');
+
+		return $eventsOfDate;
 	}
 }

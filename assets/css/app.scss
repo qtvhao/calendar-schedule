@@ -1,6 +1,9 @@
-#date-cells {
-  width: 920px;
+.date-cells-wrapper {
+.date-cells {
   margin: 1em;
+.date-cells-container {
+  overflow: hidden auto;
+  width: 920px;
   .date-cell-wrapper {
     position: relative;
     background: #fff;
@@ -19,13 +22,21 @@
       }
       outline: 0;
       text-align: right;
-      height: unset;
+      height: 40px;
     }
 
-    .date-cell-text {
+    .date-cell-container {
       position: absolute;
       right: 9px;
       top: 8px;
     }
+    .date-cell-events-wrapper {
+      position: absolute;
+      bottom: 0;
+      z-index:999;
+      width: -webkit-fill-available;
+    }
   }
+}
+}
 }
