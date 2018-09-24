@@ -2,7 +2,13 @@
 <link rel="stylesheet" href="assets/css/app.css">
 <?php
 require_once 'vendor/autoload.php';
+
+use Carbon\Carbon;
 use Qtvhao\CalendarSchedule\Calendar;
+use Qtvhao\CalendarSchedule\Event\ShortEvent;
 
 $calendar = Calendar::regular();
+$start    = Carbon::now();
+$end    = Carbon::now()->addDay(4);
+$calendar->addEvent(new ShortEvent($start, $end));
 $calendar->render();

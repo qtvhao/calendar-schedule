@@ -7,6 +7,8 @@
  */
 namespace Qtvhao\CalendarSchedule;
 
+use Qtvhao\CalendarSchedule\Event\Event;
+
 /**
  * @property DateTime start_at
  * @property DateTime end_at
@@ -73,5 +75,8 @@ class Calendar {
 		}while($date->copy()->addDay(1)->lessThanOrEqualTo( $this->end_at));
 
 		return $dates;
+	}
+
+	public function addEvent( Event$event ) {
 	}
 }

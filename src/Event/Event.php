@@ -5,8 +5,6 @@
  * Date: 9/23/2018
  * Time: 1:41 PM
  */
-namespace Qtvhao\CalendarSchedule;
+namespace Qtvhao\CalendarSchedule\Event;
 
-class Event {
-
-}
+abstract class Event {}
