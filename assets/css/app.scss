@@ -9,7 +9,7 @@
     background: #fff;
     outline: 1px solid #c5c5c5;
     height: 90px;
-    width: 14%;
+    width: calc(100%/7);
     display: inline-block;
     &.date-cell-heading-wrapper {
       .date-cell-heading-container {
