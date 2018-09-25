@@ -32,9 +32,16 @@
     }
     .date-cell-events-wrapper {
       position: absolute;
-      bottom: 0;
+      bottom: 12px;
       z-index:999;
       width: -webkit-fill-available;
+      .date-cell-events {
+        .date-cell-events-container {
+          border-radius: 5px;
+          padding: 0 9px;
+          text-align: center;
+        }
+      }
     }
   }
 }

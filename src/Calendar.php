@@ -62,7 +62,13 @@ class Calendar {
 		}
 		foreach($dates as $date) {
 			$dateEvents = $this->buildEventElementsOfDate($date);
-			echo "<div class='date-cell-wrapper'>
+			$zIndex     = 9 - $date->dayOfWeek;
+			$events_of_date     = $this->getEventsOfDate( $date );
+			$eventsIsNotEmpty = (int)$events_of_date->filter->isOnDate()->isNotEmpty();
+			$classes = '';
+			$rowHeight = ($this->events->count() * 28 + 53) . 'px';
+			$classes .= ($eventsIsNotEmpty?'events-is-not-empty':'events-is-empty');
+			echo "<div class='date-cell-wrapper $classes' style='z-index: $zIndex;height:$rowHeight' data-events-is-not-empty='$eventsIsNotEmpty'>
     <div class='date-cell'>
         <div class='date-cell-container'>
             <div class='date-cell-text'>
@@ -107,7 +113,7 @@ class Calendar {
 		} );
 	}
 
-	private function buildEventElementsOfDate(Carbon $date ) {
+	private function buildEventElementsOfDate(DateTime $date ) {
 		$eventsOfDate = $this->getEventsOfDate( $date );
 		$eventsOfDate = $eventsOfDate->map(function(Event$event) use ( $date ) {
 			$width = (($event->end->diffInDays($date) + 1) * 100) . '%';
@@ -115,10 +121,11 @@ class Calendar {
 			$text = ($event->isOnDate() ? $event->getId() : '&nbsp;');
 
 			$background = ($event->isOnDate()) ? "#CFFCC1" : "unset";
+			$pointerEvents = ($event->isNotHappenYetAt($date)) ? 'none' : 'all';
 
 			return <<<HTML
-<div class='date-cell-events' style="width:$width;padding: 5px;">
-    <div class='date-cell-events-container' style="background:$background;padding: 0px 9px;">
+<div class='date-cell-events' style="width:$width;padding: 2px 5px;pointer-events: $pointerEvents">
+    <div class='date-cell-events-container' style="background:$background;">
         {$text}
     </div>
 </div>
