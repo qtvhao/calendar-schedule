@@ -117,6 +117,9 @@ class Calendar {
 		$eventsOfDate = $this->getEventsOfDate( $date );
 		$eventsOfDate = $eventsOfDate->map(function(Event$event) use ( $date ) {
 			$width = (($event->end->diffInDays($date) + 1) * 100) . '%';
+			if($event->end->greaterThanOrEqualTo( $date->copy()->endOfWeek())) {
+				$width = ($date->copy()->endOfWeek()->diffInDays($date) + 1) . '00%';
+			}
 
 			$text = ($event->isOnDate() ? $event->getId() : '&nbsp;');
 
