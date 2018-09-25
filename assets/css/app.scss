@@ -1,3 +1,20 @@
+.calendar-pagination-wrapper {
+  margin: 1em;
+  .calendar-today{
+    .calendar-month{
+      display: inline-block;
+      font-size:2em;
+    }
+    .calendar-year{
+      display: inline-block;
+      font-size:2em;
+      margin-left: 9px;
+    }
+  }
+  .calendar-pagination {
+    width: 920px;
+  }
+}
 .date-cells-wrapper {
 .date-cells {
   margin: 1em;

@@ -29,6 +29,11 @@ class Calendar {
 		$calendar = new Calendar();
 		$calendar->setStart(DateTime::getMondayStartOfMonth());
 		$calendar->setEnd(DateTime::getSundayEndOfMonth());
+		if(isset($_GET['calendar_start_at'])) {
+			$calendar_start_at = static::getTimestampFromRequest();
+			$calendar->setStart( $calendar_start_at->copy()->startOfMonth()->startOfWeek());
+			$calendar->setEnd( $calendar_start_at->copy()->endOfMonth()->endOfWeek());
+		}
 
 		return $calendar;
 	}
@@ -41,7 +46,44 @@ class Calendar {
 		$this->end_at = $sundayOfMonthEnd;
 	}
 
+	/**
+	 * @return DateTime
+	 */
+	private static function getTimestampFromRequest() {
+		if (isset($_GET['calendar_start_at'])) {
+			return DateTime::createFromTimeString( $_GET['calendar_start_at'] );
+		}else{
+			return DateTime::now();
+		}
+	}
+
 	public function render( $view = 'default' ) {
+		if($view === 'pagination') {
+			$stamp = static::getTimestampFromRequest();
+			$prev   = '?' . http_build_query([ 'calendar_start_at' =>(string) $stamp->copy()->subMonths( 1 )]);
+			$today  = '?' . http_build_query(['calendar_start_at'=>(string) DateTime::today() ]);
+			$next   = '?' . http_build_query(['calendar_start_at'=>(string) $stamp->copy()->addMonth(1)]);
+			$year = $stamp->year;
+			$month = $stamp->englishMonth;
+			echo <<<HTML
+<div class="calendar-pagination-wrapper">
+<div class="calendar-today float-left"><div class="calendar-month">$month</div> <div class="calendar-year">$year</div></div>
+<div class="calendar-pagination">
+<div class="calendar-pagination-container pull-right">
+    <a href="$prev" class="btn btn-outline-secondary ">
+         &nbsp;<i class="fa fa-angle-left" aria-hidden="true"></i> &nbsp;
+    </a>
+    <a href="$next" class="btn btn-outline-secondary ">
+         &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i> &nbsp;
+    </a>
+    <a href="$today" class="btn btn-outline-secondary ">today</a>
+</div>
+<div class="clear" style="clear:both;"></div>
+</div>
+</div>
+HTML;
+			return;
+		}
 		echo "<div class='date-cells-wrapper'>";
 		$dates = $this->getDates();
 		echo "<div class='date-cells'>";
