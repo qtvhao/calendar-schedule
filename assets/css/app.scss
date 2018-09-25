@@ -4,6 +4,8 @@
 .date-cells-container {
   overflow: hidden auto;
   width: 920px;
+  border: 1px solid #ccc;
+  display: inline-block;
   .date-cell-wrapper {
     position: relative;
     background: #fff;
