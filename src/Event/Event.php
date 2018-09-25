@@ -8,6 +8,7 @@
 namespace Qtvhao\CalendarSchedule\Event;
 
 use Carbon\Carbon;
+use Qtvhao\CalendarSchedule\DateTime;
 
 /**
  * Class Event
@@ -51,5 +52,9 @@ abstract class Event {
 	 */
 	public function setIsOnDate( $is_on_date ) {
 		$this->is_on_date = $is_on_date;
+	}
+
+	public function isNotHappenYetAt(DateTime $date ) {
+		return $date->timestamp < $this->start->timestamp;
 	}
 }
