@@ -100,10 +100,10 @@ class Calendar {
 	}
 
 	private function getEventsOfDate( Carbon $date ) {
-		return $this->events->filter( function ( Event $event ) use ( $date ) {
-			return
-				( $event->end->timestamp > $date->timestamp ) and
-				( $event->start->timestamp < $date->timestamp );
+		return $this->events->map( function ( Event $event ) use ( $date ) {
+			$event->setIsOnDate( ( ( $event->end->timestamp >= $date->timestamp ) and ( $event->start->timestamp <= $date->timestamp ) ));
+
+			return $event;
 		} );
 	}
 
@@ -112,10 +112,14 @@ class Calendar {
 		$eventsOfDate = $eventsOfDate->map(function(Event$event) use ( $date ) {
 			$width = (($event->end->diffInDays($date) + 1) * 100) . '%';
 
+			$text = ($event->isOnDate() ? $event->getId() : '&nbsp;');
+
+			$background = ($event->isOnDate()) ? "#CFFCC1" : "unset";
+
 			return <<<HTML
 <div class='date-cell-events' style="width:$width;padding: 5px;">
-    <div class='date-cell-events-container' style="background:#CFFCC1;padding: 0px 9px;">
-        {$event->getId()}
+    <div class='date-cell-events-container' style="background:$background;padding: 0px 9px;">
+        {$text}
     </div>
 </div>
 HTML;

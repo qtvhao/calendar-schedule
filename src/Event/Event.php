@@ -16,7 +16,14 @@ use Carbon\Carbon;
  * @property Carbon end
  */
 abstract class Event {
+	/**
+	 * @var int
+	 */
 	private $id;
+	/**
+	 * @var bool
+	 */
+	private $is_on_date;
 
 	/**
 	 * @return mixed
@@ -30,5 +37,19 @@ abstract class Event {
 	 */
 	public function setId( $id ) {
 		$this->id = $id;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isOnDate() {
+		return $this->is_on_date;
+	}
+
+	/**
+	 * @param bool $is_on_date
+	 */
+	public function setIsOnDate( $is_on_date ) {
+		$this->is_on_date = $is_on_date;
 	}
 }

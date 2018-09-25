@@ -3,12 +3,15 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Carbon\Carbon;
+use Qtvhao\CalendarSchedule\DateTime as Carbon;
 use Qtvhao\CalendarSchedule\Calendar;
-use Qtvhao\CalendarSchedule\Event\ShortEvent;
+use Qtvhao\CalendarSchedule\Event\LongEvent;
 
 $calendar = Calendar::regular();
-$start    = Carbon::now();
-$end    = Carbon::now()->addDay(4);
-$calendar->addEvent(new ShortEvent($start, $end));
+$start    = Carbon::now()->startOfWeek();
+$end    = Carbon::now()->addDay(5);
+$calendar->addEvent(new LongEvent(123, $start, $end));
+$start    = Carbon::now()->subDay(1);
+$end    = Carbon::now()->addDay(5);
+$calendar->addEvent(new LongEvent(1232, $start, $end));
 $calendar->render();
